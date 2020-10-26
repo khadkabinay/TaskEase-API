@@ -1,18 +1,19 @@
 
-// external imports
+// EXTERNAL IMPORTS
 const express = require("express");
 const cors = require("cors");
 
+// INTERNAL IMPORTS
+const routes = require("./routes");
 
-
+// PORT
 const port = process.env.PORT || 4000;
 const app = express();
 
 
-app.get('/', (req, res)=> {
+// Users Routes
+app.use("/users", routes.user);
 
-    res.send("Home page ")
-})
 
 
 // middleware - JSON parsing
