@@ -20,6 +20,7 @@ app.use(bodyParser.json())
 
 // Users Routes
 app.use("/users", routes.user);
+app.use("/tasks", routes.task);
 
 
 
