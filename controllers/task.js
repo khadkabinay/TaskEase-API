@@ -58,6 +58,25 @@ const create = async (req, res) => {
 
 
 
+//UPDATE ROUTE FOR TASK
+const update = async(req, res) => {
+    try {
+      const taskUpdated = await db.Task.findByIdAndUpdate(req.params.id, req.body, {new: true}) 
+            if(!taskUpdated){
+                res.status(200).json({ "message": "No task is found" })
+            }else{
+            res.status(200).json({ "task": taskUpdated});
+           }
+      }catch(err){
+          return res.status(500).json({
+              status: 500,
+              message: "Something went wrong. Please try again",
+          });
+      }
+  };
+
+
+
 
 
 
@@ -66,6 +85,7 @@ const create = async (req, res) => {
 module.exports = {
     index,
     show,
-    create
+    create,
+    update
   
 };
