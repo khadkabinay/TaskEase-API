@@ -47,7 +47,7 @@ const show = async (req, res) => {
 const create = async (req, res) => {
     try {
         const  userCreated = await db.User.create(req.body);
-        res.status(201).json({ user : userCreated });
+        res.status(201).json({ "user" : userCreated });
 
     }catch(err){
         return res.status(500).json({
@@ -78,12 +78,38 @@ const update = async(req, res) => {
 
 
 
+const destroy = async (req, res) => {
+  try {
+    const userDeleted = await db.User.findByIdAndDelete(req.params.id)
+        if(!userDeleted){
+          res.status(200).json({ "message": "No user is found with id" });
+        }else{
+          res.status(200).json({ "user": userDeleted});
+      }
+  }catch(err){
+        return res.status(500).json({
+            status: 500,
+            message: "Something went wrong. Please try again",
+        });
+}
+
+}
+
+
+
+
+
+
+
+
+
 
 module.exports = {
       index,
       show,
       create,
-      update
+      update,
+      destroy
   };
 
 
