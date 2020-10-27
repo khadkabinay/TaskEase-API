@@ -14,6 +14,12 @@ const app = express();
 //Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
+app.use(express.json());
+app.use(cors());
+
+
+
+
 
 
 
@@ -21,13 +27,6 @@ app.use(bodyParser.json())
 // Users Routes
 app.use("/users", routes.user);
 app.use("/tasks", routes.task);
-
-
-
-// middleware - JSON parsing
-app.use(express.json());
-app.use(cors());
-
 
 
 
