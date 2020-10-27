@@ -2,6 +2,7 @@
 // EXTERNAL IMPORTS
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser")
 
 // INTERNAL IMPORTS
 const routes = require("./routes");
@@ -9,6 +10,12 @@ const routes = require("./routes");
 // PORT
 const port = process.env.PORT || 4000;
 const app = express();
+
+//Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
+
+
 
 
 // Users Routes

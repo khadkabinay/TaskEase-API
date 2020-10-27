@@ -8,7 +8,7 @@ const db = require('../models');
 const index = async (req, res) => {
     try{
         const foundUsers = await db.User.find({});
-        res.status(200).json({ status: 200, data: foundUsers });
+        res.status(200).json({ status: 200, "users": foundUsers });
       
     }catch (err) {
         return res.status(500).json({
@@ -20,15 +20,19 @@ const index = async (req, res) => {
 }
 
 
-// SHOW ROUTE
 
+
+
+
+
+// SHOW ROUTE
 const show = async (req, res) => {
      try{
-         foundUser = await db.User.findById(req.params.id)
+       const foundUser = await db.User.findById(req.params.id)
          if(!foundUser){
-         res.status(200).json({ "message": "No User with that id found in db" });
+         res.status(200).json({ "message": "No User found with id " });
         }else{
-        res.status(200).json({  status: 200, user : foundUser });
+        res.status(200).json({  status: 200, "user" : foundUser });
 
         }
 
@@ -45,6 +49,23 @@ const show = async (req, res) => {
 
 
 
+// CREATE ROUTE
+const create = async (req, res) => {
+    try {
+      const  userCreated = await db.User.create(req.body);
+        res.status(201).json({ user : userCreated });
+
+    }catch(err){
+        return res.status(500).json({
+          status: 500,
+          message: "Something went wrong. Please try again",
+        });
+      }
+};
+
+
+
+
 
 
 
@@ -52,7 +73,8 @@ const show = async (req, res) => {
 
 module.exports = {
      index,
-     show
+     show,
+     create
   };
 
 
