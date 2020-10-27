@@ -41,8 +41,31 @@ const show = async (req, res) => {
 };
 
 
+
+// CREATE ROUTE FOR TASK
+const create = async (req, res) => {
+    try {
+        const  taskCreated = await db.Task.create(req.body);
+        res.status(201).json({ "task" : taskCreated });
+
+    }catch(err){
+        return res.status(500).json({
+            status: 500,
+            message: "Something went wrong. Please try again",
+        });
+      }
+};
+
+
+
+
+
+
+
+
 module.exports = {
     index,
-    show
+    show,
+    create
   
 };
