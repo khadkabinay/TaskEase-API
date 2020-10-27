@@ -4,9 +4,10 @@ const ctrl = require("../controllers");
 
 
 router.get("/", ctrl.task.index);
-router.post("/", ctrl.task.create);
 router.get("/:id", ctrl.task.show);
+router.post("/", ctrl.task.create);
 router.put("/:id", ctrl.task.update);
+router.delete("/:id", ctrl.task.destroy);
 
 
 module.exports = router;

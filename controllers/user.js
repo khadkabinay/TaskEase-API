@@ -77,7 +77,7 @@ const update = async(req, res) => {
 };
 
 
-
+// DELETE ROUTE
 const destroy = async (req, res) => {
   try {
     const userDeleted = await db.User.findByIdAndDelete(req.params.id)

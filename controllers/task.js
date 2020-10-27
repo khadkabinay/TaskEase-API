@@ -76,6 +76,36 @@ const update = async(req, res) => {
   };
 
 
+  
+  
+  // DELETE ROUTE FOR TASK
+const destroy = async (req, res) => {
+    try {
+      const taskDeleted = await db.Task.findByIdAndDelete(req.params.id)
+          if(!taskDeleted){
+            res.status(200).json({ "message": "No task is found with id" });
+          }else{
+            res.status(200).json({ "task": taskDeleted});
+        }
+    }catch(err){
+          return res.status(500).json({
+              status: 500,
+              message: "Something went wrong. Please try again",
+          });
+  }
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 
 
 
@@ -86,6 +116,7 @@ module.exports = {
     index,
     show,
     create,
-    update
+    update,
+    destroy
   
 };
