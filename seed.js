@@ -1,11 +1,24 @@
 const db = require('./models');
-const data = require('./tasks.json');
+const userData = require('./users.json');
+const taskData = require('./tasks.json');
 
-db.User.deleteMany({}, (err, deletedTasks) => {
-    db.User.create(data.users, (err, seededUsers) => {
+db.User.deleteMany({}, (err, deletedUsers) => {
+    db.User.create(userData.users, (err, seededUsers) => {
         if (err) console.log(err);
         
-        console.log(data.users.length, 'users created successfully');
+        console.log(userData.users.length, 'users created successfully');
+        
+        process.exit();
+    });
+});
+
+
+
+db.Task.deleteMany({}, (err, deletedTasks) => {
+    db.Task.create(taskData.tasks, (err, seededTasks) => {
+        if (err) console.log(err);
+        
+        console.log(taskData.tasks.length, 'tasks created successfully');
         
         process.exit();
     });
