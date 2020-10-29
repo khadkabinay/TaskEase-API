@@ -7,14 +7,14 @@ const userSchema = new mongoose.Schema(
     name: { type: String, required: [true, "You must provide a name."] },
     username: {type: String, required: true, unique: true},
     email: {type: String, required:[true, "You must provide an email."] },
-    image: {type: String, required:[true, "You must provide a email."] },
+    image: {type: String, required:[true, "You must provide a image."] },
     password: {type: String, required: true},
     phoneNumber: {type: Number, required:[true, "You must provide a phone number."] },
     completedTask:{type: Number, default: 0},
-    role :{type: String},
+     role :{type: String},
     
     // REFERENCE TO TASKS
-    Tasks: [ { type: mongoose.Schema.Types.ObjectId, ref: "Task" } ]
+    tasks: [ { type: mongoose.Schema.Types.ObjectId, ref: "Task" } ]
  },
   {
     timestamps: true, 

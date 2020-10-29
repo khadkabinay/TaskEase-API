@@ -8,7 +8,7 @@ const db = require('../models');
 // INDEX ROUTE FOR TASK
 const index = async (req, res) => {
     try{
-        const foundTasks = await db.Task.find({});
+        const foundTasks = await db.Task.find({}).populate("user").exec()
         res.status(200).json({ status: 200, "tasks": foundTasks });
       
     }catch (err) {
@@ -44,8 +44,12 @@ const show = async (req, res) => {
 
 // CREATE ROUTE FOR TASK
 const create = async (req, res) => {
-    try {
+     console.log("req.body",req.body)
+     try {
         const  taskCreated = await db.Task.create(req.body);
+        const  foundUser = await db.User.findById(req.body.user);
+        foundUser.tasks.push(taskCreated)
+        await foundUser.save()
         res.status(201).json({ "task" : taskCreated });
 
     }catch(err){
