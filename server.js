@@ -26,7 +26,7 @@ app.use(cors());
 
 // Users Routes
 app.use("/users", routes.user);
-app.use("/api/v1/tasks", routes.task);
+app.use("/tasks", routes.task);
 
 
 

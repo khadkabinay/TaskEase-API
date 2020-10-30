@@ -44,7 +44,6 @@ const show = async (req, res) => {
 
 // CREATE ROUTE FOR TASK
 const create = async (req, res) => {
-     console.log("req.body",req.body)
      try {
         const  taskCreated = await db.Task.create(req.body);
         const  foundUser = await db.User.findById(req.body.user);
@@ -88,10 +87,15 @@ const destroy = async (req, res) => {
       const taskDeleted = await db.Task.findByIdAndDelete(req.params.id)
           if(!taskDeleted){
             res.status(200).json({ "message": "No task is found with id" });
+
           }else{
+              const foundUser = await db.User.findById(req.body._id)
+              foundUser.tasks.remove(taskDeleted._id)
+             await foundUser.save()
             res.status(200).json({ "task": taskDeleted});
         }
     }catch(err){
+        console.log("error", err)
           return res.status(500).json({
               status: 500,
               message: "Something went wrong. Please try again",
@@ -99,6 +103,14 @@ const destroy = async (req, res) => {
   }
   
   }
+
+// const destroy = (req, res) => {
+//     db.Task.findByIdAndDelete(req.params.id, (err, taskDeleted) => {
+//         if (err) console.log('Error in games#destroy:', err);
+//         if(!deletedGame) return res.status(200).json({ "message": "No game with that id found in db" });
+//         res.status(200).json({ "task": taskDeleted });
+//     });
+// };
   
   
   
