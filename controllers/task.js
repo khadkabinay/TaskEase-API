@@ -104,14 +104,6 @@ const destroy = async (req, res) => {
   
   }
 
-// const destroy = (req, res) => {
-//     db.Task.findByIdAndDelete(req.params.id, (err, taskDeleted) => {
-//         if (err) console.log('Error in games#destroy:', err);
-//         if(!deletedGame) return res.status(200).json({ "message": "No game with that id found in db" });
-//         res.status(200).json({ "task": taskDeleted });
-//     });
-// };
-  
   
   
   
