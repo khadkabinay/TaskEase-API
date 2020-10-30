@@ -8,7 +8,8 @@ const db = require('../models');
 const index = async (req, res) => {
       try{
           const foundUsers = await db.User.find({});
-          res.status(200).json({ status: 200, "users": foundUsers });
+          const foundUser = await db.User.findById(req.id).populate('tasks').exec()
+          res.status(200).json({ status: 200, "users": foundUsers, "foundUser":foundUser });
         
       }catch (err) {
           return res.status(500).json({
@@ -24,7 +25,7 @@ const index = async (req, res) => {
 // SHOW ROUTE
 const show = async (req, res) => {
      try{
-       const foundUser = await db.User.findById(req.params.id)
+       const foundUser = await db.User.findById(req.params.id).populate("tasks").exec()
             if(!foundUser){
                 res.status(200).json({ "message": "No User found with id " });
             }else{
