@@ -84,6 +84,9 @@ const login = async (req, res) => {
   };
   
 
+  // POST Logout Route
+const logout = (req, res) => {
+  };
 
 
 
@@ -96,5 +99,7 @@ const login = async (req, res) => {
 
 module.exports = {
     register,
+    login,
+    logout,
    
   };
