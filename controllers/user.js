@@ -26,6 +26,8 @@ const index = async (req, res) => {
 const show = async (req, res) => {
      try{
        const foundUser = await db.User.findById(req.params.id).populate("tasks").exec()
+    //    const authUserFound = await db.User.findById(req.userId);
+    // //    res.status(200).json({ status: 200, data: authUserFound });
             if(!foundUser){
                 res.status(200).json({ "message": "No User found with id " });
             }else{
