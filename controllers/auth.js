@@ -5,9 +5,9 @@ const jwt = require("jsonwebtoken");
 // POST Register Route
 const register = async (req, res) => {
   try {
-    const foundAuthUser = await db.AuthUser.findOne({ email: req.body.email });
+    const foundUser = await db.User.findOne({ email: req.body.email });
 
-    if (foundAuthUser) {
+    if (foundUser) {
       return res.send({ message: "Account is already registered" });
     }
 
@@ -16,7 +16,7 @@ const register = async (req, res) => {
     const hash = await bcrypt.hash(req.body.password, salt);
     req.body.password = hash;
     // create user with req.body and hashed password
-    const createdUser = await db.AuthUser.create({ ...req.body, password: hash });
+    const createdUser = await db.User.create({ ...req.body, password: hash });
 
     return res
       .status(201)
@@ -37,13 +37,13 @@ const register = async (req, res) => {
 // POST Login Route
 const login = async (req, res) => {
     try {
-      const foundAuthUser = await await db.AuthUser.findOne({ email: req.body.email });
+      const foundUser = await await db.User.findOne({ email: req.body.email });
   
-      if (!foundAuthUser) {
+      if (!foundUser) {
         return res.send({ message: "Email or Password incorrect" });
       }
   
-      const match = await bcrypt.compare(req.body.password, foundAuthUser.password);
+      const match = await bcrypt.compare(req.body.password, foundUser.password);
   
       if (!match) {
         return res.send({ message: "Email or Password incorrect" });
@@ -53,7 +53,7 @@ const login = async (req, res) => {
         // create a json web token
         const signedJwt = await jwt.sign(
           {
-            _id: foundAuthUser._id,
+            _id: foundUser._id,
           },
           "super_secret_key",
           {
@@ -65,7 +65,7 @@ const login = async (req, res) => {
         return res.status(200).json({
           status: 200,
           message: "Success",
-          id: foundAuthUser._id,
+          id: foundUser._id,
           signedJwt,
         });
       } else {
