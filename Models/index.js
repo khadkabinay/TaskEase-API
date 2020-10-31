@@ -29,7 +29,6 @@ mongoose.connection.on('error', () => {
 
 module.exports = {
  User: require('./User.js'),
- Task: require('./Task.js'),
- AuthUser: require('./AuthUser.js')
+ Task: require('./Task.js')
  
 }

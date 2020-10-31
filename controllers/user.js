@@ -8,8 +8,9 @@ const db = require('../models');
 const index = async (req, res) => {
       try{
           const foundUsers = await db.User.find({});
+          const authUserFound = await db.User.findById(req.userId);
           const foundUser = await db.User.findById(req.id).populate('tasks').exec()
-          res.status(200).json({ status: 200, "users": foundUsers, "foundUser":foundUser });
+          res.status(200).json({ status: 200, "users": foundUsers, "foundUser":foundUser, data: authUserFound  });
         
       }catch (err) {
           return res.status(500).json({
@@ -26,12 +27,10 @@ const index = async (req, res) => {
 const show = async (req, res) => {
      try{
        const foundUser = await db.User.findById(req.params.id).populate("tasks").exec()
-    //    const authUserFound = await db.User.findById(req.userId);
-    // //    res.status(200).json({ status: 200, data: authUserFound });
             if(!foundUser){
                 res.status(200).json({ "message": "No User found with id " });
             }else{
-                res.status(200).json({  status: 200, "user" : foundUser });
+                res.status(200).json({  status: 200, "user" : foundUser});
           }
 
         }catch(err){
