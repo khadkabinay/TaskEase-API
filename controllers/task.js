@@ -104,19 +104,6 @@ const destroy = async (req, res) => {
   
   }
 
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-
-
-
 
 
 
