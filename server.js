@@ -28,6 +28,7 @@ app.use(cors());
 app.use("/users", routes.user);
 app.use("/tasks", routes.task);
 app.use("/authUser", routes.authUser);
+app.use("/auth", routes.auth);
 
 
 

@@ -93,10 +93,6 @@ const logout = (req, res) => {
 
 
 
-
-
-
-
 module.exports = {
     register,
     login,
