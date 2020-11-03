@@ -60,6 +60,7 @@ const create = async (req, res) => {
 };
 
 
+
 //UPDATE ROUTE 
 
 const update = async(req, res) => {
@@ -83,9 +84,10 @@ const update = async(req, res) => {
 const destroy = async (req, res) => {
   try {
     const userDeleted = await db.User.findByIdAndDelete(req.params.id)
-        if(!userDeleted){
-          res.status(200).json({ "message": "No user is found with id" });
-        }else{
+    if(!userDeleted){
+        res.status(200).json({ "message": "No user is found with id" });
+    }else{
+        await db.Task.deleteMany({user: userDeleted._id})
           res.status(200).json({ "user": userDeleted});
       }
   }catch(err){

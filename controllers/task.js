@@ -9,6 +9,7 @@ const db = require('../models');
 const index = async (req, res) => {
     try{
         const foundTasks = await db.Task.find({}).populate("user").exec()
+        
         res.status(200).json({ status: 200, "tasks": foundTasks });
       
     }catch (err) {
