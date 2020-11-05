@@ -2,6 +2,7 @@
 // EXTERNAL IMPORTS
 const express = require("express");
 const cors = require("cors");
+require('dotenv').config()
 const bodyParser = require("body-parser")
 
 // INTERNAL IMPORTS

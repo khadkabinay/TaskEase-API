@@ -4,10 +4,12 @@ const db = require('../models');
 
 
 
+
 // INDEX ROUTE
 const index = async (req, res) => {
       try{
-          const foundUsers = await db.User.find({});
+     
+          const foundUsers = await db.User.find({}).populate('tasks').exec()
           const foundUser = await db.User.findById(req.id).populate('tasks').exec()
                 const authUserFound = await db.User.findById(req.userId);
           res.status(200).json({ status: 200, "users": foundUsers, "foundUser":foundUser , "data": authUserFound});

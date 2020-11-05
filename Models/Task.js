@@ -6,7 +6,7 @@ const taskSchema = new mongoose.Schema(
   {
     name: { type: String, required: [true, "You must provide a Task."] }, 
     date: {type: String, required: true},
-    iscompleted:{type: Boolean, default:false },
+    isCompleted:{type: Boolean},
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
  },
   {
