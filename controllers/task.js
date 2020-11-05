@@ -64,8 +64,6 @@ const create = async (req, res) => {
 
 //UPDATE ROUTE FOR TASK
 const update = async(req, res) => {
-
-    console.log("req from show page " ,req.body)
     try {
       const taskUpdated = await db.Task.findByIdAndUpdate(req.params.id, req.body, {new: true}) 
             if(!taskUpdated){
