@@ -2,7 +2,9 @@ const bcrypt = require("bcryptjs");
 const db = require("../models");
 const jwt = require("jsonwebtoken");
 
-// POST Register Route
+
+
+// POST REGISTER ROUTE
 const register = async (req, res) => {
   try {
     const foundUser = await db.User.findOne({ email: req.body.email });
@@ -34,11 +36,10 @@ const register = async (req, res) => {
 
 
 
-// POST Login Route
+// POST LOGIN ROUTE
 const login = async (req, res) => {
     try {
       const foundUser = await await db.User.findOne({ email: req.body.email });
-      console.log(foundUser ,"foundUser:++")
   
       if (!foundUser) {
         return res.send({ message: "Email or Password incorrect" });
@@ -86,7 +87,7 @@ const login = async (req, res) => {
   };
   
 
-  // POST Logout Route
+  // POST LOGOUT ROUTE
 const logout = (req, res) => {
   };
 

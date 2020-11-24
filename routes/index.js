@@ -1,5 +1,5 @@
 module.exports = {
     user: require("./user"),
     task: require("./task"),
-    auth: require("./auth")
+    auth: require("./auth"),
   };

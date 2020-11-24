@@ -1,6 +1,7 @@
 const db = require('./models');
 const userData = require('./users.json');
 const taskData = require('./tasks.json');
+require('dotenv').config()
 
 db.User.deleteMany({}, (err, deletedUsers) => {
     db.User.create(userData.users, (err, seededUsers) => {
