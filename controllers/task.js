@@ -9,34 +9,32 @@ const db = require('../models');
 const index = async (req, res) => {
     try{
         const foundTasks = await db.Task.find({}).populate("user").exec()
-        
         res.status(200).json({ status: 200, "tasks": foundTasks });
-      
     }catch (err) {
         return res.status(500).json({
-          status: 500,
-          message: "Something went wrong. Please try again",
+        status: 500,
+        message: "Something went wrong. Please try again",
         });
     }
- 
+
 }
 
 
 // SHOW ROUTE FOR TASKS
 const show = async (req, res) => {
     try{
-      const foundTask = await db.Task.findById(req.params.id)
-           if(!foundTask){
-               res.status(200).json({ "message": "No Task found with id " });
-           }else{
-               res.status(200).json({  status: 200, "task" : foundTask });
-         }
+    const foundTask = await db.Task.findById(req.params.id)
+        if(!foundTask){
+            res.status(200).json({ "message": "No Task found with id " });
+        }else{
+            res.status(200).json({  status: 200, "task" : foundTask });
+        }
 
-       }catch(err){
-           return res.status(500).json({
-               status: 500,
-               message: "Something went wrong. Please try again",
-         });
+    }catch(err){
+        return res.status(500).json({
+            status: 500,
+            message: "Something went wrong. Please try again",
+        });
     }
 
 };
@@ -45,7 +43,7 @@ const show = async (req, res) => {
 
 // CREATE ROUTE FOR TASK
 const create = async (req, res) => {
-     try {
+    try {
         const  taskCreated = await db.Task.create(req.body);
         const  foundUser = await db.User.findById(req.body.user);
         foundUser.tasks.push(taskCreated)
@@ -57,7 +55,7 @@ const create = async (req, res) => {
             status: 500,
             message: "Something went wrong. Please try again",
         });
-      }
+    }
 };
 
 
@@ -65,45 +63,43 @@ const create = async (req, res) => {
 //UPDATE ROUTE FOR TASK
 const update = async(req, res) => {
     try {
-      const taskUpdated = await db.Task.findByIdAndUpdate(req.params.id, req.body, {new: true}) 
+    const taskUpdated = await db.Task.findByIdAndUpdate(req.params.id, req.body, {new: true}) 
             if(!taskUpdated){
                 res.status(200).json({ "message": "No task is found" })
             }else{
             res.status(200).json({ "task": taskUpdated});
-           }
-      }catch(err){
-          return res.status(500).json({
-              status: 500,
-              message: "Something went wrong. Please try again",
-          });
-      }
-  };
+        }
+    }catch(err){
+        return res.status(500).json({
+            status: 500,
+            message: "Something went wrong. Please try again",
+        });
+    }
+};
 
 
-  
-  
+
   // DELETE ROUTE FOR TASK
 const destroy = async (req, res) => {
     try {
-      const taskDeleted = await db.Task.findByIdAndDelete(req.params.id)
-          if(!taskDeleted){
+    const taskDeleted = await db.Task.findByIdAndDelete(req.params.id)
+        if(!taskDeleted){
             res.status(200).json({ "message": "No task is found with id" });
 
-          }else{
-              const foundUser = await db.User.findById(req.body._id)
-              foundUser.tasks.remove(taskDeleted._id)
-             await foundUser.save()
+        }else{
+            const foundUser = await db.User.findById(req.body._id)
+            foundUser.tasks.remove(taskDeleted._id)
+            await foundUser.save()
             res.status(200).json({ "task": taskDeleted});
         }
     }catch(err){
         console.log("error", err)
-          return res.status(500).json({
-              status: 500,
-              message: "Something went wrong. Please try again",
-          });
-  }
-  
-  }
+        return res.status(500).json({
+            status: 500,
+            message: "Something went wrong. Please try again",
+        });
+}
+}
 
 
 
@@ -114,5 +110,4 @@ module.exports = {
     create,
     update,
     destroy
-  
 };

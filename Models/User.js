@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema(
     password: {type: String, required: true},
     phoneNumber: {type: Number, required:[true, "You must provide a phone number."] },
     completedTask:{type: Number, default: 0},
-     role :{type: String ,default:"normalUser"},
+     role :{type: String ,default:"admin"},
     
     // REFERENCE TO TASKS
     tasks: [ { type: mongoose.Schema.Types.ObjectId, ref: "Task" } ]
